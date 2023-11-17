@@ -1,0 +1,93 @@
+Authentication
+POST /signup
+
+Description: Create a new user account.
+Request Body:
+name: User's name (string)
+email: User's email address (string)
+password: User's password (string)
+Response:
+message: Success message or error message (string)
+user: User object containing user details (object)
+POST /login
+
+Description: Authenticate user and generate a token for further requests.
+Request Body:
+email: User's email address (string)
+password: User's password (string)
+Response:
+message: Success message or error message (string)
+token: Generated JWT token for authentication (string)
+Folder Management
+POST /createFolder
+
+Description: Create a new folder.
+Authentication Required: Yes (JWT Token)
+Request Body:
+name: Name of the folder (string)
+Response:
+message: Success message or error message (string)
+folder: Folder object containing folder details (object)
+Subfolder Management
+POST /createSubfolder
+
+Description: Create a new subfolder within a folder.
+Authentication Required: Yes (JWT Token)
+Request Body:
+name: Name of the subfolder (string)
+Response:
+message: Success message or error message (string)
+subfolder: Subfolder object containing subfolder details (object)
+File Management
+POST /uploadFile
+
+Description: Upload a file to a folder or subfolder.
+Authentication Required: Yes (JWT Token)
+Request Body:
+file: File to upload
+folderId: ID of the folder (integer)
+subfolderId: ID of the subfolder (integer, optional)
+Response:
+fileURL: URL of the uploaded file
+success: Success status (boolean)
+fileId: ID of the uploaded file
+PUT /renameFile
+
+Description: Rename a file.
+Authentication Required: Yes (JWT Token)
+Request Body:
+file_id: ID of the file to rename (integer)
+updated_name: New name for the file (string)
+Response:
+message: Success message or error message (string)
+file: Updated file object containing file details (object)
+PUT /moveFile
+
+Description: Move a file to a different folder or subfolder.
+Authentication Required: Yes (JWT Token)
+Request Body:
+file_id: ID of the file to move (integer)
+folderId: ID of the new folder (integer)
+subfolderId: ID of the new subfolder (integer, optional)
+Response:
+message: Success message or error message (string)
+DELETE /deleteFile
+
+Description: Delete a file.
+Authentication Required: Yes (JWT Token)
+Request Body:
+file_id: ID of the file to delete (integer)
+Response:
+message: Success message or error message (string)
+Pagination
+GET /getFiles
+
+Description: Retrieve files with pagination.
+Authentication Required: Yes (JWT Token)
+Query Parameters:
+page: Page number (integer, optional, default: 1)
+limit: Number of files per page (integer, optional, default: 10)
+Response:
+files: Array of file objects within the specified page
+currentPage: Current page number (integer)
+totalPages: Total number of pages available (integer)
